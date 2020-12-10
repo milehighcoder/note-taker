@@ -10,6 +10,13 @@ module.exports = (app) => {
   //POST REQUEST
   app.post("/api/notes", (req, res) => {
     notesData.push(req.body);
-    res.json("Saved");
+    let savedNotes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+    let newNote = req.body;
+    let uniqueID = savedNotes.length.toString();
+    newNote.id = uniqueID;
+    savedNotes.push(newNote);
+    fs.writeFileSync("./db/db.json", JSON.stringify(savedNotes));
+    console.log("Note saved");
+    res.json(savedNotes);
   });
 };
