@@ -57,7 +57,7 @@ const renderActiveNote = () => {
     noteTitle.setAttribute("readonly", true);
     noteText.setAttribute("readonly", true);
     noteTitle.value = activeNote.title;
-    noteText.value = activeNote.title;
+    noteText.value = activeNote.text;
   } else {
     noteTitle.value = "";
     noteText.value = "";
@@ -95,7 +95,6 @@ const handleNoteDelete = (e) => {
 
 // Sets the activeNote and displays it
 const handleNoteView = (e) => {
-  console.log("Setting new note", e.target);
   e.preventDefault();
   activeNote = JSON.parse(e.target.parentElement.getAttribute("data-note"));
   renderActiveNote();
@@ -131,7 +130,7 @@ const renderNoteList = async (notes) => {
 
     const spanEl = document.createElement("span");
     spanEl.innerText = text;
-    liEl.addEventListener("click", handleNoteView);
+    spanEl.addEventListener("click", handleNoteView);
 
     liEl.append(spanEl);
 
