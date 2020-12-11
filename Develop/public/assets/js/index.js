@@ -95,6 +95,7 @@ const handleNoteDelete = (e) => {
 
 // Sets the activeNote and displays it
 const handleNoteView = (e) => {
+  console.log("Setting new note", e.target);
   e.preventDefault();
   activeNote = JSON.parse(e.target.parentElement.getAttribute("data-note"));
   renderActiveNote();
@@ -130,7 +131,7 @@ const renderNoteList = async (notes) => {
 
     const spanEl = document.createElement("span");
     spanEl.innerText = text;
-    spanEl.addEventListener("click", handleNoteView);
+    liEl.addEventListener("click", handleNoteView);
 
     liEl.append(spanEl);
 
