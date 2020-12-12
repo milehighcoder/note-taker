@@ -4,6 +4,7 @@ let saveNoteBtn;
 let newNoteBtn;
 let noteList;
 
+// Dynamically creates notes.html elements
 if (window.location.pathname === "/notes") {
   noteTitle = document.querySelector(".note-title");
   noteText = document.querySelector(".note-textarea");
@@ -37,9 +38,15 @@ const saveNote = (note) =>
   fetch("/api/notes", {
     method: "POST",
     headers: {
+      Accept: "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(note),
+  }).then((response) => {
+    if (response.ok) {
+      return response.json();
+    }
+    alert("Error: " + response.statusText);
   });
 
 const deleteNote = (id) =>
@@ -54,8 +61,6 @@ const renderActiveNote = () => {
   hide(saveNoteBtn);
 
   if (activeNote.id) {
-    noteTitle.setAttribute("readonly", true);
-    noteText.setAttribute("readonly", true);
     noteTitle.value = activeNote.title;
     noteText.value = activeNote.text;
   } else {
@@ -100,7 +105,7 @@ const handleNoteView = (e) => {
   renderActiveNote();
 };
 
-// Sets the activeNote to and empty object and allows the user to enter a new note
+// Sets the activeNote to an empty object and allows the user to enter a new note
 const handleNewNoteView = (e) => {
   activeNote = {};
   renderActiveNote();
@@ -117,6 +122,7 @@ const handleRenderSaveBtn = () => {
 // Render the list of note titles
 const renderNoteList = async (notes) => {
   let jsonNotes = await notes.json();
+
   if (window.location.pathname === "/notes") {
     noteList.forEach((el) => (el.innerHTML = ""));
   }
@@ -150,17 +156,17 @@ const renderNoteList = async (notes) => {
 
     return liEl;
   };
-
+  //if there are no notes saved display "No saved Notes" in the span
   if (jsonNotes.length === 0) {
     noteListItems.push(createLi("No saved Notes", false));
+  } else {
+    jsonNotes.forEach((note) => {
+      const li = createLi(note.title);
+      li.dataset.note = JSON.stringify(note);
+
+      noteListItems.push(li);
+    });
   }
-
-  jsonNotes.forEach((note) => {
-    const li = createLi(note.title);
-    li.dataset.note = JSON.stringify(note);
-
-    noteListItems.push(li);
-  });
 
   if (window.location.pathname === "/notes") {
     noteListItems.forEach((note) => noteList[0].append(note));
