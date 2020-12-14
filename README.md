@@ -18,7 +18,7 @@ The application’s front end was provided. My job was to simply build the backe
 
 ## Installation
 
-No installation is required to run this application. Simply go to the deployed link for [Note Taker][https://milehighcoder-note-taker.herokuapp.com/] and start using it right away!
+No installation is required to run this application. Simply go to the deployed link for [Note Taker](https://milehighcoder-note-taker.herokuapp.com/) and start using it right away!
 
 ## Usage
 
