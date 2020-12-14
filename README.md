@@ -4,9 +4,9 @@
 
 ## Description
 
-I modified starter code to create an application called Note Taker that can be used to write, save, and delete notes. This application uses an Express.js backend and saves and retrieve note data from a JSON file.
+I modified starter code to create an application called "Note Taker" that can be used to write, save, and delete notes. This application uses an Express.js backend and saves and retrieves note data from a JSON file.
 
-The application’s front end was provided. My job was to simply build the back end, connect it with the front end, and then deploy the entire application to Heroku.
+The application’s front end was provided. My job was to simply build the backend, connect it with the front end, and then deploy the entire application to Heroku.
 
 ## Table of Contents
 
@@ -18,7 +18,7 @@ The application’s front end was provided. My job was to simply build the back 
 
 ## Installation
 
-No installation is required to run this application. Simply go to the deployed link for [Note Taker][Apphttps://milehighcoder-note-taker.herokuapp.com/] and start using right away!
+No installation is required to run this application. Simply go to the deployed link for [Note Taker][Apphttps://milehighcoder-note-taker.herokuapp.com/] and start using it right away!
 
 ## Usage
 
