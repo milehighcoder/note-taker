@@ -1,48 +1,40 @@
 //CONNECTS ROUTES TO NOTES DATA
-const notesData = require("../db/db.json");
-const fs = require("fs");
 const path = require("path");
+const notes = require("../db/db.json");
+const fs = require("fs");
+const uniqid = require("uniqid");
 
 //ROUTING
 module.exports = (app) => {
-  function writeToDB(notes) {
-    notes = JSON.stringify(notes);
-    console.log(notes);
-    fs.writeFileSync("./db/db.json", notes, function (err) {
-      if (err) {
-        return console.log(err);
-      }
-    });
-  }
-  //GET REQUEST
-  app.get("/api/notes", (req, res) => res.json(notesData));
+  app.get("/api/notes", (req, res) => {
+    const result = notes;
+    res.json(result);
+  });
 
-  //POST REQUEST
   app.post("/api/notes", (req, res) => {
-    if (notesData.length == 0) {
-      req.body.id = "0";
-    } else {
-      req.body.id = JSON.stringify(
-        JSON.parse(notesData[notesData.length - 1].id) + 1
-      );
-    }
-    console.log("Note" + " #" + req.body.id + " Saved");
-    notesData.push(req.body);
-    writeToDB(notesData);
-    res.json(req.body);
+    req.body.id = uniqid();
+
+    const note = req.body;
+    console.log(notes);
+    notes.push(note);
+    fs.writeFileSync(
+      path.join(__dirname, "../db/db.json"),
+      JSON.stringify(notes)
+    );
+    res.json(note);
   });
 
   app.delete("/api/notes/:id", function (req, res) {
     const id = req.params.id;
-    for (i = 0; i < notesData.length; i++) {
-      if (notesData[i].id === id) {
-        notesData.splice(i, 1);
+    for (i = 0; i < notes.length; i++) {
+      if (notes[i].id === id) {
+        notes.splice(i, 1);
       }
     }
     fs.writeFileSync(
       path.join(__dirname, "../db/db.json"),
-      JSON.stringify({ notesData }, null, 2)
+      JSON.stringify(notes)
     );
-    res.send(notesData);
+    res.send(notes);
   });
 };
