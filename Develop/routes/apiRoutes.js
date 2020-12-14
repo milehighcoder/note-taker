@@ -7,8 +7,7 @@ const uniqid = require("uniqid");
 //ROUTING
 module.exports = (app) => {
   app.get("/api/notes", (req, res) => {
-    const result = notes;
-    res.json(result);
+    res.json(notes);
   });
 
   app.post("/api/notes", (req, res) => {
