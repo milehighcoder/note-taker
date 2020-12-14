@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 8080;
 //DATA PARSING HANDLERS
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static("public")); //CONNECTS "PUBLIC" FOLDER TO SERVER.JS
+app.use(express.static("./public")); //CONNECTS "PUBLIC" FOLDER TO SERVER.JS
 
 //ROUTES
 require("./routes/apiRoutes")(app);
