@@ -24,7 +24,7 @@ No installation is required to run this application. Simply go to the deployed l
 
 ![alttext](assets/note-taker.gif "App Preview")
 
-Users are able to write, save, and delete notes so that they can organize their thoughts and keep track of task that they need to complete. This application uses the following technologies:
+Users are able to write, save, and delete notes so that they can organize their thoughts and keep track of tasks that they need to complete. This application uses the following technologies:
 
 * HTML 5
 * CSS 3
